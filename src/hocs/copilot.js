@@ -1,16 +1,16 @@
 // @flow
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
-import { View } from 'react-native';
-
-import mitt from 'mitt';
 import hoistStatics from 'hoist-non-react-statics';
-
+import mitt from 'mitt';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { View } from 'react-native';
 import CopilotModal from '../components/CopilotModal';
 import { OFFSET_WIDTH } from '../components/style';
+import { getFirstStep, getLastStep, getNextStep, getPrevStep, getStepNumber } from '../utilities';
 
-import { getFirstStep, getLastStep, getStepNumber, getPrevStep, getNextStep } from '../utilities';
+
+
+
 
 import type { Step, CopilotContext } from '../types';
 
@@ -25,7 +25,8 @@ type State = {
   currentStep: ?Step,
   visible: boolean,
   androidStatusBarVisible: boolean,
-  backdropColor: string
+  backdropColor: string,
+  delay: number
 };
 
 const copilot = ({
@@ -33,6 +34,7 @@ const copilot = ({
   tooltipComponent,
   stepNumberComponent,
   animated,
+  delay = 0,
   androidStatusBarVisible,
   backdropColor,
   verticalOffset = 0,
@@ -158,14 +160,16 @@ const copilot = ({
       }
 
       async moveToCurrentStep(): void {
+        setTimeout(async () => {
         const size = await this.state.currentStep.target.measure();
 
         await this.modal.animateMove({
           width: size.width + OFFSET_WIDTH,
           height: size.height + OFFSET_WIDTH,
           left: size.x - (OFFSET_WIDTH / 2),
-          top: (size.y - (OFFSET_WIDTH / 2)) + verticalOffset,
+          top: size.y - (OFFSET_WIDTH / 2),
         });
+      }, delay);
       }
 
       render() {
