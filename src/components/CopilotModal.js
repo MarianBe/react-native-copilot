@@ -20,6 +20,7 @@ type Props = {
   stepNumberComponent: ?React$Component,
   overlay: 'svg' | 'view',
   animated: boolean,
+  buttonTextConfig: object,
   androidStatusBarVisible: boolean,
   backdropColor: string
 };
@@ -272,6 +273,7 @@ class CopilotModal extends Component<Props, State> {
           handleNext={this.handleNext}
           handlePrev={this.handlePrev}
           handleStop={this.handleStop}
+          buttonTextConfig={this.props.buttonTextConfig}
         />
       </Animated.View>,
     ];
