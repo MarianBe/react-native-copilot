@@ -39,6 +39,7 @@ const copilot = ({
   backdropColor,
   verticalOffset = 0,
   wrapperStyle,
+  buttonTextConfig
 } = {}) =>
   (WrappedComponent) => {
     class Copilot extends Component<any, State> {
@@ -195,6 +196,7 @@ const copilot = ({
               tooltipComponent={tooltipComponent}
               overlay={overlay}
               animated={animated}
+              buttonTextConfig={buttonTextConfig}
               androidStatusBarVisible={androidStatusBarVisible}
               backdropColor={backdropColor}
               ref={(modal) => { this.modal = modal; }}
