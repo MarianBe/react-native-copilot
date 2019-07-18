@@ -15,6 +15,7 @@ type Props = {
   handlePrev: func,
   handleStop: func,
   currentStep: Step,
+  buttonTextConfig: object,
 };
 
 const Tooltip = ({
@@ -24,6 +25,7 @@ const Tooltip = ({
   handlePrev,
   handleStop,
   currentStep,
+  buttonTextConfig,
 }: Props) => (
   <View>
     <View style={styles.tooltipContainer}>
@@ -33,24 +35,24 @@ const Tooltip = ({
       {
         !isLastStep ?
           <TouchableOpacity onPress={handleStop}>
-            <Button>Skip</Button>
+            <Button>{buttonTextConfig.skipButton || 'Skip'}</Button>
           </TouchableOpacity>
           : null
       }
       {
         !isFirstStep ?
           <TouchableOpacity onPress={handlePrev}>
-            <Button>Previous</Button>
+            <Button>{buttonTextConfig.prevButton || 'Previous'}</Button>
           </TouchableOpacity>
           : null
       }
       {
         !isLastStep ?
           <TouchableOpacity onPress={handleNext}>
-            <Button>Next</Button>
+            <Button>{buttonTextConfig.nextButton || 'Next'}</Button>
           </TouchableOpacity> :
           <TouchableOpacity onPress={handleStop}>
-            <Button>Finish</Button>
+            <Button>{buttonTextConfig.finishButton || 'Finish'}</Button>
           </TouchableOpacity>
       }
     </View>
